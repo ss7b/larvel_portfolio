@@ -7,6 +7,8 @@ use App\Http\Controllers\MainInfoController;
 use App\Http\Controllers\PortfoliosController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SkillsController;
+use App\Http\Controllers\WebsideController;
+use App\Http\Controllers\WebsiteController;
 use App\Models\MainInfo;
 use GuzzleHttp\Middleware;
 use Illuminate\Routing\Controllers\Middleware as ControllersMiddleware;
@@ -39,5 +41,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/website', [WebsiteController::class, 'index'])->name('website');
 // Route::resource('/about', AboutController::class);
 

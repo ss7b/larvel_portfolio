@@ -42,13 +42,18 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3"> {{ config('app.name', 'Laravel') }}</div>
+            <div class="sidebar-brand-text mx-3"> {{ config('app.name', 'Laravel') }} </div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
+        <li class="nav-item ">
+            <a class="nav-link" _blank href="{{ route('website') }}">
+                <i class="fas fa-fw fa-link"></i>
+                <span>{{ __('الموقع') }}</span></a>
+        </li>
         <li class="nav-item ">
             <a class="nav-link" href="{{ route('home') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -98,7 +103,7 @@
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-
+        
     </ul>
     <!-- End of Sidebar -->
 
