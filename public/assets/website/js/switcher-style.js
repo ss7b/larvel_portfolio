@@ -38,16 +38,15 @@ function setActiveStyle(color){
 // them light and dark mode
 let dayNight  = document.querySelector(".day-night");
 let logo = document.querySelector(".logo")
-console.log(logo.getAttribute("src"))
+
 
 // toggler class
 dayNight.addEventListener('click',()=>{
     dayNight.querySelector("i").classList.toggle("fa-sun");
     dayNight.querySelector("i").classList.toggle("fa-moon");
     document.body.classList.toggle("dark");
-    // logo.innerHTML = ''
     if(document.body.classList.contains("dark")){
-        logo.innerHTML =`<img src="{{asset('assets/website/img/logo-2.png')}}" alt="logo">`
+        logo.innerHTML =`<img src="{{asset('assets/website/img/logo-2.PNG')}}" alt="logo">`
         localStorage.setItem("moode","dark")
     }
     else{

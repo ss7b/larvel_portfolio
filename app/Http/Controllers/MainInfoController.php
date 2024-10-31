@@ -63,33 +63,17 @@ class MainInfoController extends Controller
             $file = $req->getClientOriginalName();
             $cvPath = $req->storeAs('pdf', $file, 'public');
             $data["cv"] = '/storage/'.$cvPath;
+            
             // user id
             $data["user_id"] = auth()->user()->id;
 
             MainInfo::create($data);
             return redirect('mainInfo')->with('flash_message', 'Image Added!');
-        } else {
-            return redirect('image')->with('flash_message', 'Please select an image to upload.');
         }
-
+        
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MainInfo $mainInfo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MainInfo $mainInfo)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -100,30 +84,39 @@ class MainInfoController extends Controller
             'firstName' => 'sometimes|required',
             'lastName' => 'sometimes|required',
             'description' => 'sometimes|required',
-            'image' => 'sometimes|file', // Allow optional file upload
+            'image' => 'sometimes|required',
+            'provider' => 'sometimes|required',
+            'cv' => 'sometimes|required|mimes:pdf|max:2048',
+            'birthday' => 'sometimes|required',
+            'contact_number' => ['sometimes','required', 'string', 'max:10'],
+            'email' => 'sometimes|required',
+            'location' => 'sometimes|required',
         ]);
     
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image') && $request->hasFile('cv')) {
             // Delete the old image if it exists
-            if ($mainInfo->image) {
+            if ($mainInfo->image && $mainInfo->cv) {
                 Storage::delete($mainInfo->image);
+                Storage::delete($mainInfo->cv);
             }
     
-            // Upload the new image
-            $fileName = time() . $request->file('image')->getClientOriginalName();
+            // Upload the new file
+            $fileName = time().$request->file('image')->getClientOriginalName();
             $path = $request->file('image')->storeAs('images', $fileName, 'public');
-            $data['image'] = '/storage/' . $path;
+            $data["image"] = '/storage/'.$path;
+
+            // pdf file
+            $req =$request->file('cv');
+            $file = $req->getClientOriginalName();
+            $cvPath = $req->storeAs('pdf', $file, 'public');
+            $data["cv"] = '/storage/'.$cvPath;
+
         }
     
         $mainInfo->update($data);
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MainInfo $mainInfo)
-    {
-        //
-    }
+    
+    
 }

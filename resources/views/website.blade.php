@@ -22,7 +22,8 @@
     <div class="main-container">
         <aside class="aside"> 
             <div class="logo">
-                <img src="{{asset('assets/website/img/logo.png')}}" alt="logo">
+                
+                <img src="{{asset('assets/website/img/logo.png')}}" alt="logo" >
             </div>
             <div class="nav-toggler">
                 <span></span>
