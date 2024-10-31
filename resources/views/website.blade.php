@@ -48,9 +48,9 @@
                         <div class="info padd-15">
                             <h3 class="hello">مرحبا, اسمي <span class="name">{{$info->firstName}} {{$info->lastName}} </span></h3>
                             {{-- ToDo add profisson --}}
-                            <h3 class="profisson">انا <span class="typing">مطور واجهات المستخدم </span> </h3>
+                            <h3 class="profisson">انا <span class="typing">{{$info->provider}}</span> </h3>
                             <p>{{$info->description}}</p>
-                            <a href="https://github.com/ss7b?tab=repositories" target="_blank" class="btn">مستودع github</a>
+                            <a href="{{$info->cv}}" target="_blank" class="btn">وظفني </a>
                         </div>
                         <div class="home-image padding">
                             <img src="{{$info->image}}" alt="">
@@ -70,28 +70,26 @@
                     
                     <div class="row">
                         <div class="personal-info">
-                            <div class="row">
-                                <div class="info-item">
-                                    <p>ميلاد: <span>1999/10/28</span></p>
+                            @foreach ($maininfos as $info)
+                                <div class="row">
+                                    <div class="info-item">
+                                        <p>ميلاد: <span id="birthday">{{$info->birthday}}</span></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <p>عمر: <span id="age"></span></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <p>ايميل: <span>{{$info->email}}</span></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <p>الهاتف: <span dir="ltr">+966 {{$info->contact_number}}</span></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <p>مدينه: <span>{{$info->location}}</span></p>
+                                    </div>
                                 </div>
-                                <div class="info-item">
-                                    <p>عمر: <span>23</span></p>
-                                </div>
-                                <div class="info-item">
-                                    <p>ايميل: <span>babks93@gmail.com</span></p>
-                                </div>
-                                <div class="info-item">
-                                    <p>الهاتف: <span dir="ltr">+966 555 424 064</span></p>
-                                </div>
-                                <div class="info-item">
-                                    <p>مدينه: <span>مكة المكرمة</span></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="buttons ">
-                                    <a href="#contact" class="btn hire-me" data-section-index="1" >وظفني</a>
-                                </div>
-                            </div>
+                                
+                            @endforeach
                         </div>
                         <div class="skills">
                             <div class="row">
@@ -217,19 +215,19 @@
                     <h3 class="contact-title padd-15">هل لديك اي اسئلة؟</h3>
                     <h4 class="contact-sub-title padd-15"> انا في خدمتك</h4>
                     <div class="row">
-                       
+                       @foreach ($maininfos as $info)
                          <!-- contact-info-item -->
                          <div class="contact-info-item padd-15">
                             <div class="icon"><i class="fa fa-phone"></i></div>
                             <h4>اتصل بنا</h4>
-                            <p dir="ltr">+966 555 424 064</p>
+                            <p dir="ltr">+966 {{$info->contact_number}}</p>
                         </div>
                         <!-- contact-info-item end -->
                          <!-- contact-info-item -->
                          <div class="contact-info-item padd-15">
                             <div class="icon"><i class="fa fa-envelope"></i></div>
                             <h4> email</h4>
-                            <p>babks93@gmail.com</p>
+                            <p>{{$info->email}}</p>
                         </div>
                         <!-- contact-info-item end -->
                          <!-- contact-info-item -->
@@ -238,6 +236,7 @@
                             <h4> موقع الاكتروني</h4>
                             <p>www.suhail.com</p>
                         </div>
+                        @endforeach
                         <!-- contact-info-item end -->
                     </div>
                     <h3 class="contact-title padd-15" id="contact">راسلني ع البريد</h3>
@@ -301,6 +300,8 @@
     
     <!-- =============style-switcher-end ============-->
     <!-- ==============js ============ -->
+
+
     <script src="{{ asset('assets/website/js/script.js') }}"></script>
     <script src="{{ asset('assets/website/js/switcher-style.js') }}"></script>
 </body>

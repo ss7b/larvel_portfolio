@@ -61,13 +61,13 @@ function ubdateNav(e){
     }
 }
 
-document.querySelector(".hire-me").addEventListener("click",function(){
-    let dataIndex = this.getAttribute("data-section-index")
-    showSection(this)
-    ubdateNav(this)
-    removeBakcSection()
-    addBackSection(dataIndex)
-})
+// document.querySelector(".hire-me").addEventListener("click",function(){
+//     let dataIndex = this.getAttribute("data-section-index")
+//     showSection(this)
+//     ubdateNav(this)
+//     removeBakcSection()
+//     addBackSection(dataIndex)
+// })
 
 
 
@@ -101,3 +101,25 @@ view.forEach(v => {
         e.currentTarget.classList.toggle("active")
     })
 });
+
+
+// الحصول على تاريخ الميلاد من عنصر الإدخال
+var birthday = new Date(document.getElementById("birthday").textContent);
+
+// الحصول على التاريخ الحالي
+var today = new Date();
+
+// حساب الفرق في السنوات
+var age = today.getFullYear() - birthday.getFullYear();
+console.log(age);
+
+// حساب الفرق في الأشهر
+var month = today.getMonth() - birthday.getMonth();
+
+// تعديل العمر إذا كان الشهر الحالي أقل من شهر الميلاد
+if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) {
+age--;
+}
+
+// عرض النتيجة
+document.getElementById("age").textContent = age;
