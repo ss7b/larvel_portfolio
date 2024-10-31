@@ -46,11 +46,11 @@
                                                         <input type="file" id="image" class="form-control form-control-user" name="image" style="display:none;">
                                                     </div>
                                                     <div class="text-center mb-4 " style="position: relative">
-                                                        <a href="{{$info->cv}}" target="_blank" download=""><img src="{{ asset('assets/admin/img/cv.png') }}" alt=""> </a>
-                                                        <label for="image" >
-                                                            <i class="fas fa-edit fa-2x" style="color: #a8abb3;position: absolute;top: 65%;left: -23%; cursor: pointer;"></i>
+                                                        <a href="{{$info->cv}}" target="_blank"=""><img src="{{ asset('assets/admin/img/cv.png') }}" alt=""> </a>
+                                                        <label for="cv" >
+                                                            <i class="fas fa-edit fa-2x" style="color: #eb7190;position: absolute;top: 65%;left: -23%; cursor: pointer;"></i>
                                                         </label>
-                                                        <input type="file" id="image" class="form-control form-control-user" name="image" style="display:none;">
+                                                        <input type="file" id="cv" class="form-control form-control-user" name="cv" style="display:none;">
                                                     </div>
                                                 </div>
                                                 
