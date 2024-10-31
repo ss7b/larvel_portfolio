@@ -84,7 +84,7 @@ class MainInfoController extends Controller
             'firstName' => 'sometimes|required',
             'lastName' => 'sometimes|required',
             'description' => 'sometimes|required',
-            'image' => 'sometimes|required',
+            'image' => 'sometimes|file',
             'provider' => 'sometimes|required',
             'cv' => 'sometimes|required|mimes:pdf|max:2048',
             'birthday' => 'sometimes|required',
@@ -93,24 +93,30 @@ class MainInfoController extends Controller
             'location' => 'sometimes|required',
         ]);
     
-        if ($request->hasFile('image') && $request->hasFile('cv')) {
-            // Delete the old image if it exists
-            if ($mainInfo->image && $mainInfo->cv) {
+        if ($request->hasFile('image') || $request->hasFile('cv')) {
+            // Delete old files if they exist
+            if ($mainInfo->image) {
                 Storage::delete($mainInfo->image);
+            }
+            if ($mainInfo->cv) {
                 Storage::delete($mainInfo->cv);
             }
-    
-            // Upload the new file
-            $fileName = time().$request->file('image')->getClientOriginalName();
-            $path = $request->file('image')->storeAs('images', $fileName, 'public');
-            $data["image"] = '/storage/'.$path;
-
-            // pdf file
-            $req =$request->file('cv');
-            $file = $req->getClientOriginalName();
-            $cvPath = $req->storeAs('pdf', $file, 'public');
-            $data["cv"] = '/storage/'.$cvPath;
-
+        
+            // Upload new files
+            if ($request->hasFile('image')) {
+                $fileName = time().$request->file('image')->getClientOriginalName();
+                $path = $request->file('image')->storeAs('images', $fileName, 'public'); 
+        
+                $data["image"] = '/storage/'.$path;
+        
+            }
+        
+            if ($request->hasFile('cv')) {
+                $req = $request->file('cv');
+                $file = $req->getClientOriginalName();
+                $cvPath = $req->storeAs('pdf', $file, 'public');
+                $data["cv"] = '/storage/'.$cvPath;
+            }
         }
     
         $mainInfo->update($data);
