@@ -13,6 +13,12 @@ class MainInfo extends Model
         'lastName',
         'description',
         'image',
+        'provider',
+        'cv',
+        'birthday',
+        'contact_number',
+        'email',
+        'location',
         'user_id',
     ];
 

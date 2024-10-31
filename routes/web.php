@@ -3,8 +3,10 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ExperiencesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainInfoController;
 use App\Http\Controllers\PortfoliosController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\WebsideController;
@@ -35,12 +37,16 @@ Route::resource('/educations', EducationsController::class);
 Route::resource('/services', ServicesController::class);
 Route::resource('/portfolios', PortfoliosController::class);
 
-
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/website', [WebsiteController::class, 'index'])->name('website');
-// Route::resource('/about', AboutController::class);
+
+Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 

@@ -26,14 +26,6 @@ class MainInfoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -49,13 +41,29 @@ class MainInfoController extends Controller
             'lastName' => 'required',
             'description' => 'required',
             'image' => 'required',
+            'provider' => 'required',
+            'cv' => 'required|mimes:pdf|max:2048',
+            'birthday' => 'required',
+            'contact_number' => ['required', 'string', 'max:10'],
+            'email' => 'required',
+            'location' => 'required',
         ]);
         
-        if ($request->hasFile('image')) {
+
+        // حفظ الملف في التخزين
+        
+        
+        if ($request->hasFile('image') && $request->hasFile('cv')) {
             $fileName = time().$request->file('image')->getClientOriginalName();
             $path = $request->file('image')->storeAs('images', $fileName, 'public');
             $data["image"] = '/storage/'.$path;
 
+            // pdf file
+            $req =$request->file('cv');
+            $file = $req->getClientOriginalName();
+            $cvPath = $req->storeAs('pdf', $file, 'public');
+            $data["cv"] = '/storage/'.$cvPath;
+            // user id
             $data["user_id"] = auth()->user()->id;
 
             MainInfo::create($data);
